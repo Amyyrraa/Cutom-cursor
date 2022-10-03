@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Anton');
+
+.cursor {
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #f30cd0;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.cursor__follower {
+  transition: transform .4s;
+  width: 6px;
+  height: 6px;
+}
+
+/* Unrelated styles */
+html {
+  cursor: none;
+  background-color: #2d2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  font-family: 'Anton', 'helvetica', sans-serif;
+  font-size: 100px;
+  letter-spacing: 12px;
+  line-height: 1;
+  text-align: center;
+}
+
+h1 span {
+  letter-spacing: 15px;
+}
+    </style>
+
+    <h1>CUSTOM<br><span>CURSOR</span></h1>
+
+</body>
+<script>
+    const root = document.querySelector('html')
+
+// Real cursor element
+const cursor = document.createElement('div')
+cursor.classList.add('cursor')
+root.appendChild(cursor)
+
+// Following extra cursor element
+const follower = document.createElement('div')
+follower.classList.add('cursor', 'cursor__follower')
+root.appendChild(follower)
+
+
+root.addEventListener('mousemove', (e) => {
+  setPosition(follower, e)
+  setPosition(cursor, e)
+})
+
+function setPosition(element, e) {
+  element.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
+}
+</script>
+</html>
